@@ -15,12 +15,20 @@
     <%= f.text_field :body %>
     <p>
       <%= f.label :画像投稿 %>
-      <%= f.file_field :qimage %>
-      <%= f.hidden_field :qimage_cache %>
+      <label><input type="radio" name="qimageToggle" id="qimageToggle1" value="" checked="checked" />文章のみ</label>
+      <label><input type="radio" name="qimageToggle" id="qimageToggle2" value="" />画像を設定</label>
+      <div id='questionnaire-image-selection' style='display: none;'>
+        <%= f.file_field :qimage %>
+        <%= f.hidden_field :qimage_cache %>
+      </div>
     </p>
     <p>
       <%= f.label :回答期限 %>
-      <%= f.text_field :date_by, class: 'form-control datetimepicker' %>
+      <label><input type="radio" name="deadlineToggle" id="deadlineToggle1" value="" checked="checked" />回答期限を設けない</label>
+      <label><input type="radio" name="deadlineToggle" id="deadlineToggle2" value="" />回答期限を設定</label>
+      <div id='deadline' style='display: none;'>
+        <%= f.text_field :date_by, class: 'form-control datetimepicker' %>
+      </div>
     </p>
     <br>
     <%= f.hidden_field :user_id,  :value => current_user.id %>
