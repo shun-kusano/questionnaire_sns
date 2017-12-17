@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  body: MyText
+  option_a_id: 1
+  option_b_id: 1
+  qimage: MyString
+  date_by: 2017-12-16 20:29:46
+
+two:
+  body: MyText
+  option_a_id: 1
+  option_b_id: 1
+  qimage: MyString
+  date_by: 2017-12-16 20:29:46

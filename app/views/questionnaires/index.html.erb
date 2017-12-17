@@ -1,2 +1,14 @@
-<h1>Questionnaires#index</h1>
-<p>Find me in app/views/questionnaires/index.html.erb</p>
+<% @questionnaires.each do |questionnaire| %>
+  <p> 本文：<%= questionnaire.body %></p>
+  <% if questionnaire.qimage? %>
+  <p>
+    <img src='<%= questionnaire.qimage.url %>'>
+  </p>
+  <% end %>
+  <% if questionnaire.date_by? %>
+  <p>
+    <%= questionnaire.date_by.strftime("%Y/%m/%d/ %H:%M")  %>
+  </p>
+  <% end %>
+
+<% end %>

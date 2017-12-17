@@ -1,0 +1,30 @@
+<p id="notice"><%= notice %></p>
+
+<%= form_for(questionnaire) do |f| %>
+    <% if questionnaire.errors.any? %>
+        <div id="error_explanation">
+            <h2><%= questionnaire.errors.count %>件のエラーがあります。</h2>
+            <ul>
+                <% questionnaire.errors.full_messages.each do |msg| %>
+                    <li><%= msg %></li>
+                <% end %>
+            </ul>
+        </div>
+    <% end %>
+    <%= f.label :アンケートの内容 %>
+    <%= f.text_field :body %>
+    <p>
+      <%= f.label :画像投稿 %>
+      <%= f.file_field :qimage %>
+      <%= f.hidden_field :qimage_cache %>
+    </p>
+    <p>
+      <%= f.label :回答期限 %>
+      <%= f.text_field :date_by, class: 'form-control datetimepicker' %>
+    </p>
+    <br>
+    <%= f.hidden_field :user_id,  :value => current_user.id %>
+    <%= f.submit '投稿', class: 'btn btn-primary btn-block' %>
+<% end %>
+
+<%= link_to "ブログ一覧画面に戻る", questionnaires_path %>
