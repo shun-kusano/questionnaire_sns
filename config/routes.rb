@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
-  resources :questionnaires
+  resources :questionnaires do
+    resources :comments
+  end
 
   root 'questionnaires#index'
 

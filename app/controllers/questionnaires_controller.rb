@@ -8,16 +8,25 @@ class QuestionnairesController < ApplicationController
     else
       redirect_to new_questionnaire_path, alert: 'アンケートの作成に失敗しました。'
     end
-
   end
 
   def edit
   end
 
   def update
+    if @questionnaire.update(questionnaire_params)
+      redirect_to questionnaires_path, notice: '新しいアンケートを公開しました！'
+    else
+      redirect_to new_questionnaire_path, alert: 'アンケートの作成に失敗しました。'
+    end
   end
 
   def destroy
+    if @questionnaire.destroy
+      redirect_to questionnaires_path, notice: "アンケートを削除しました。"
+    else
+      redirect_to questionnaires_path, notice: 'アンケートを削除できませんでした。'
+    end
   end
 
   def new
@@ -29,6 +38,9 @@ class QuestionnairesController < ApplicationController
   end
 
   def show
+    @comments = @questionnaire.comments.all
+    @comment = @questionnaire.comments.build
+    binding.pry
   end
 
   def confirm

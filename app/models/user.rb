@@ -5,7 +5,8 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :trackable, :validatable, :confirmable, :omniauthable
   mount_uploader :avatar, AvatarUploader #deviseの設定配下に追記
   has_many :questionnaires
-  
+  has_many :comments
+
   def update_with_password(params, *options)
     if provider.blank?
       super

@@ -1,0 +1,26 @@
+<% if comments.first.id.present? %>
+  <% comments.each do |comment_already| %>
+    <% if comment_already.user_id.present? %>
+    <div class='comments-area clearfix'　id="comment-<%= comment_already.id %>">
+      <div class='photo'>
+        <span data-toggle="tooltip" data-placement="top" title="<%= User.find(comment_already.user_id).name %>　さんのコメント">
+          <%= image_tag(profile_img_url(User.find(comment_already.user_id)), :class=>'avatar_in_comment') %>
+        </span>
+      </div>
+      <div class='content'>
+        <p><%= comment_already.body %></p>
+      </div>
+      <% if current_user.id == comment_already.user.id %>
+        <div class="icons">
+          <%= link_to edit_questionnaire_comment_path(comment_already.questionnaire, comment_already), remote: true do %>
+          <span class="fa fa-pencil-square-o fa-lg"></span>
+          <% end %>
+          <%= link_to questionnaire_comment_path(comment_already.questionnaire, comment_already), method: :delete, data: { confirm: '本当に削除していいですか？' }  do %>
+          <span class="fa fa-trash-o fa-lg"></span>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
+    <% end %><!-- if comments.user-id.present? -->
+  <% end %><!-- each do -->
+<% end %><!-- if -->

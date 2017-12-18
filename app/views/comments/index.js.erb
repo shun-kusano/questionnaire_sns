@@ -1,0 +1,4 @@
+$("#comments_area-<%=  @comment.questionnaire.id %>").html("<%= j(render 'comments/index', { comments: @comment.questionnaire.comments, questionnaire: @comment.questionnaire }) %>");
+$("textarea").each(function(){
+    $(this).val("");
+});

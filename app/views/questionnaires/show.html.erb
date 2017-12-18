@@ -1,2 +1,22 @@
-<h1>Questionnaires#show</h1>
-<p>Find me in app/views/questionnaires/show.html.erb</p>
+  <p> 本文：<%= @questionnaire.body %></p>
+  <% if @questionnaire.qimage? %>
+  <p>
+    <img src='<%= @questionnaire.qimage.url %>'>
+  </p>
+  <% end %>
+  <% if @questionnaire.date_by? %>
+  <p>
+    <%= @questionnaire.date_by.strftime("%Y/%m/%d/ %H:%M")  %>
+  </p>
+  <% end %>
+
+  <div class='comment-all'>
+      <div id="comments_area-<%= @questionnaire.id %>" class='comments-index'>
+        <% if @comments.length > 0 %>
+          <%= render partial: 'comments/index', locals: { comments: @comments, questionnaire: @questionnaire } %>
+        <% end %>
+    </div>
+    <div id="new_comment_area-<%= @questionnaire.id %>">
+      <%= render partial: 'comments/form', locals: { comment: @comment, questionnaire: @questionnaire } %>
+    </div>
+  </div>

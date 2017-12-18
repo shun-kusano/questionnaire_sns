@@ -1,0 +1,12 @@
+<%= form_for([questionnaire, comment], remote: true) do |f| %>
+  <div class='input'>
+    <div class='text'>
+      <%= image_tag(profile_img_url(current_user), :class=>'avatar_in_text') %>
+      <%= f.text_area :body, :placeholder=>'コメントする' %>
+      <%= f.hidden_field :questionnaire_id, :value => questionnaire.id %>
+    </div><!-- text -->
+  </div>
+  <div class='submit'>
+    <%= f.submit 'コメントする', class:'btn btn-primary' %>
+  </div>
+<% end %>

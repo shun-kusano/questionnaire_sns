@@ -1,0 +1,2 @@
+$("#comments_area-<%= @questionnaire.id %>").html("<%= j(render 'comments/form', { comment: @comment, questionnaire: @questionnaire }) %>");
+$("#new_comment_area-<%= @questionnaire.id %>").html('');
