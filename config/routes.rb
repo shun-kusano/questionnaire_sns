@@ -1,6 +1,12 @@
 Rails.application.routes.draw do
+  get 'users/show'
+
+  get 'users/index'
+
   resources :questionnaires do
     resources :comments
+    resources :answeras
+    resources :answerbs
   end
 
   root 'questionnaires#index'

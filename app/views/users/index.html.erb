@@ -1,0 +1,16 @@
+<section class='user-index'>
+  <div class='container'>
+    <% @users.each do |user| %>
+        <div class='user'>
+          <div class='photo'>
+            <%= image_tag(profile_img_url(user)) %>
+          </div>
+          <div class='name'>
+            <span><%= link_to user.name, user %>  さん</span>
+          </div>
+          投稿数：<%= user.questionnaires.length %>
+          回答数：<%= user.answered_qs.length %>
+        </div>
+    <% end %>
+  </div>
+</section>

@@ -2,10 +2,14 @@ class CommentsController < ApplicationController
   def create
     @comment = Comment.new(comments_params)
     @comment.user_id = current_user.id
+    @cmtnotification = @comment.cmtnotifications.build(user_id: @comment.questionnaire.user.id )
     #@questionnaire = @comment.questionnaire
     respond_to do |format|
       #binding.pry
       if @comment.save
+        Pusher.trigger("user_#{@comment.questionnaire.user_id}_channel", 'comment_created', {
+         message: 'あなたの作成したアンケートにコメントがつきました！'
+       })
         format.html { redirect_to questionnaires_path, notice: 'コメントが投稿されました。'}
         format.js { render :index }
       else

@@ -40,7 +40,9 @@ class QuestionnairesController < ApplicationController
   def show
     @comments = @questionnaire.comments.all
     @comment = @questionnaire.comments.build
-    binding.pry
+    @answera = @questionnaire.answeras.build
+    @answerb = @questionnaire.answerbs.build
+
   end
 
   def confirm
@@ -52,7 +54,7 @@ class QuestionnairesController < ApplicationController
   private
 
   def questionnaires_params
-      params.require(:questionnaire).permit([:body, :qimage, :qimage_cache, :date_by, :user_id])
+      params.require(:questionnaire).permit([:body, :qimage, :qimage_cache, :date_by, :user_id, :optiona_body, :optiona_image, :optiona_image_cache, :optionb_body, :optionb_image, :optionb_image_cache])
   end
 
   def set_questionnaire

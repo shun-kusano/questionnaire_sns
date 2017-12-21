@@ -10,10 +10,50 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171217121524) do
+ActiveRecord::Schema.define(version: 20171221132610) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "ansnotifications", force: :cascade do |t|
+    t.boolean "answered", default: false
+    t.bigint "user_id"
+    t.bigint "questionnaire_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["questionnaire_id"], name: "index_ansnotifications_on_questionnaire_id"
+    t.index ["user_id"], name: "index_ansnotifications_on_user_id"
+  end
+
+  create_table "answeras", force: :cascade do |t|
+    t.bigint "questionnaire_id"
+    t.bigint "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["questionnaire_id", "user_id"], name: "index_answeras_on_questionnaire_id_and_user_id", unique: true
+    t.index ["questionnaire_id"], name: "index_answeras_on_questionnaire_id"
+    t.index ["user_id"], name: "index_answeras_on_user_id"
+  end
+
+  create_table "answerbs", force: :cascade do |t|
+    t.bigint "questionnaire_id"
+    t.bigint "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["questionnaire_id", "user_id"], name: "index_answerbs_on_questionnaire_id_and_user_id", unique: true
+    t.index ["questionnaire_id"], name: "index_answerbs_on_questionnaire_id"
+    t.index ["user_id"], name: "index_answerbs_on_user_id"
+  end
+
+  create_table "cmtnotifications", force: :cascade do |t|
+    t.boolean "read", default: false
+    t.bigint "user_id"
+    t.bigint "comment_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["comment_id"], name: "index_cmtnotifications_on_comment_id"
+    t.index ["user_id"], name: "index_cmtnotifications_on_user_id"
+  end
 
   create_table "comments", force: :cascade do |t|
     t.text "body"
@@ -29,13 +69,18 @@ ActiveRecord::Schema.define(version: 20171217121524) do
     t.text "body"
     t.string "qimage"
     t.datetime "date_by"
+    t.text "optiona_body"
+    t.string "optiona_image"
+    t.text "optionb_body"
+    t.string "optionb_image"
+    t.bigint "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.bigint "user_id"
     t.index ["user_id"], name: "index_questionnaires_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
+    t.string "name", default: "", null: false
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
     t.string "reset_password_token"
@@ -57,13 +102,20 @@ ActiveRecord::Schema.define(version: 20171217121524) do
     t.string "provider", default: "", null: false
     t.string "image_url"
     t.string "avatar"
-    t.string "name"
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
     t.index ["uid", "provider"], name: "index_users_on_uid_and_provider", unique: true
   end
 
+  add_foreign_key "ansnotifications", "questionnaires"
+  add_foreign_key "ansnotifications", "users"
+  add_foreign_key "answeras", "questionnaires"
+  add_foreign_key "answeras", "users"
+  add_foreign_key "answerbs", "questionnaires"
+  add_foreign_key "answerbs", "users"
+  add_foreign_key "cmtnotifications", "comments"
+  add_foreign_key "cmtnotifications", "users"
   add_foreign_key "comments", "questionnaires"
   add_foreign_key "comments", "users"
   add_foreign_key "questionnaires", "users"

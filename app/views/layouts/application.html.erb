@@ -3,10 +3,28 @@
   <head>
     <title>Questionnaire_SNS</title>
     <%= csrf_meta_tags %>
-
+    <script src="https://js.pusher.com/4.1/pusher.min.js"></script>
     <script src="https://use.fontawesome.com/4e9a8af73e.js"></script>
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+
+    <% if user_signed_in? %>
+      <script>
+        var pusher = new Pusher('<%= ENV["PUSHER_KEY"] %>',{
+          encrypted: true,
+          cluster: 'ap1'
+        });
+
+        var channel = pusher.subscribe('user_<%= current_user.id %>_channel');
+        channel.bind('answer_created', function(data) {
+            alert(data.message);
+        });
+        channel.bind('comment_created', function(data) {
+            alert(data.message);
+        });
+      </script>
+    <% end %>
+
   </head>
 
   <body>
@@ -17,6 +35,6 @@
     <% if user_signed_in? %>
       <p><%= link_to "ログアウト", destroy_user_session_path, method: :delete %></p>
     <% end %>
-    
+
   </body>
 </html>

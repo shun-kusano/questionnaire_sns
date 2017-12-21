@@ -1,0 +1,22 @@
+<section class='user-show'>
+  <div class='container'>
+    <%= render 'user_top', user: @user %>
+    <div class='user-show-questionnaires-area'>
+      <% if current_user.id == @user.id %>
+        <%= link_to :新規にアンケートを作成する, new_questionnaire_path %>
+      <% end %>
+      <% @questionnaires.each do |questionnaire| %>
+        <% if questionnaire.content.present? || questionnaire.pictures.present? %>
+          <%= render 'questionnaires/questionnaire_show_form', questionnaire: questionnaire, comments: questionnaire.comments, comment: questionnaire.comments.build %>
+        <% end %>
+      <% end %>
+      <% if @over_ten_questionnaires %>
+        <%= link_to '以前の投稿を表示', '?m=all' %>
+      <% end %>
+    </div>
+  </div>
+</section>
+
+<div id="page-top-btn" class="page-top-btn">
+    <p><a class="move-page-top" id="move-page-top">▲</a></p>
+</div>

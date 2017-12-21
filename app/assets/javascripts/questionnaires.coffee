@@ -30,7 +30,15 @@ ready = ->
       $('#questionnaire-image-selection').hide()
     $('#qimageToggle2').on 'click', ->
       $('#questionnaire-image-selection').show()
-
+    $('#a-radio-button').on 'click', ->
+      $('#b-radio-button').prop( "checked", false )
+    $('#b-radio-button').on 'click', ->
+      $('#a-radio-button').prop( "checked", false )
+    $('#send-submit').on 'click', ->
+      if $('#a-radio-button').prop('checked')
+        $('#new_answera').submit()
+      else
+        $('#new_answerb').submit()
 
   #オンロードさせ、リロード時に選択を保持
   #window.onload = deadlineEntry

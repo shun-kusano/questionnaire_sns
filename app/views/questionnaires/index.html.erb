@@ -12,6 +12,29 @@
       <%= questionnaire.date_by.strftime("%Y/%m/%d/ %H:%M")  %>
     </p>
     <% end %>
+    <p>
+      A:<%= questionnaire.optiona_body %>
+    </p>
+    <% if questionnaire.optiona_image? %>
+    <p>
+      <img src='<%= questionnaire.optiona_image.url %>'>
+    </p>
+    <% end %>
+    <p>
+      回答人数：<%= questionnaire.answering_a_users.length %>
+    </p>
+
+    <p>
+      B:<%= questionnaire.optionb_body %>
+    </p>
+    <% if questionnaire.optionb_image? %>
+    <p>
+      <img src='<%= questionnaire.optionb_image.url %>'>
+    </p>
+    <% end %>
+    <p>
+      回答人数：<%= questionnaire.answering_b_users.length %>
+    </p>
   </div>
   <% end %>
   <br><br><br>

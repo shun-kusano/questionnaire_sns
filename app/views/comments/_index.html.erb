@@ -1,4 +1,4 @@
-<% if comments.first.id.present? %>
+<% if comments.length > 0 %>
   <% comments.each do |comment_already| %>
     <% if comment_already.user_id.present? %>
     <div class='comments-area clearfix'　id="comment-<%= comment_already.id %>">
@@ -7,6 +7,15 @@
           <%= image_tag(profile_img_url(User.find(comment_already.user_id)), :class=>'avatar_in_comment') %>
         </span>
       </div>
+      <p>
+        <% if questionnaire.answering_a_users.include?(comment_already.user) %>
+            Aに回答
+        <% elsif questionnaire.answering_b_users.include?(comment_already.user) %>
+            Bに回答
+        <% else %>
+            未回答
+        <% end %>
+      </p>
       <div class='content'>
         <p><%= comment_already.body %></p>
       </div>

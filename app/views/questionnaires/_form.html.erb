@@ -32,6 +32,23 @@
     </p>
     <br>
     <%= f.hidden_field :user_id,  :value => current_user.id %>
+
+    <p>
+      <%= f.label :選択肢A %>
+      <%= f.text_field :optiona_body, class: 'form-control' %>
+    </p>
+    <p>
+      <%= f.file_field :optiona_image %>
+      <%= f.hidden_field :optiona_image_cache %>
+    </p>
+    <p>
+      <%= f.label :選択肢B %>
+      <%= f.text_field :optionb_body, class: 'form-control' %>
+    </p>
+    <p>
+      <%= f.file_field :optionb_image %>
+      <%= f.hidden_field :optionb_image_cache %>
+    </p>
     <%= f.submit '投稿', class: 'btn btn-primary btn-block' %>
 <% end %>
 

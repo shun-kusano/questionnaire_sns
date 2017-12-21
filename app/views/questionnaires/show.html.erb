@@ -9,14 +9,68 @@
     <%= @questionnaire.date_by.strftime("%Y/%m/%d/ %H:%M")  %>
   </p>
   <% end %>
+  <%= form_for([@questionnaire, @answera]) do |f| %>
+    <p>
+      A:<%= @questionnaire.optiona_body %>
+    </p>
+    <% if @questionnaire.optiona_image? %>
+    <p>
+      <img src='<%= @questionnaire.optiona_image.url %>'>
+    </p>
+    <% end %>
+    <label>
+      <%= f.radio_button :questionnaire_id, @questionnaire.id, {:id => 'a-radio-button', :checked => true} %>
+      <%= f.hidden_field :user_id, value: current_user.id %>
+    </label>
+  <% end %>
+  <p>
+    回答人数：<%= @questionnaire.answering_a_users.length %>
+  </p>
 
-  <div class='comment-all'>
-      <div id="comments_area-<%= @questionnaire.id %>" class='comments-index'>
-        <% if @comments.length > 0 %>
-          <%= render partial: 'comments/index', locals: { comments: @comments, questionnaire: @questionnaire } %>
+    <%= form_for([@questionnaire, @answerb]) do |f| %>
+      <p>
+        B:<%= @questionnaire.optionb_body %>
+      </p>
+      <% if @questionnaire.optionb_image? %>
+      <p>
+        <img src='<%= @questionnaire.optionb_image.url %>'>
+      </p>
+      <% end %>
+      <label>
+        <%= f.radio_button :questionnaire_id, @questionnaire.id, {:id => 'b-radio-button', :checked => false} %>
+        <%= f.hidden_field :user_id, value: current_user.id %>
+      </label>
+    <% end %>
+    <p>
+      回答人数：<%= @questionnaire.answering_b_users.length %>
+    </p>
+    <% if @questionnaire.date_by? && Time.current > @questionnare.date_by %>
+      <div class='alert'>
+        <p>
+          このアンケートの回答は終了しました。
+        </p>
+      </div>
+    <% else %>
+      <% if @questionnaire.answering_a_users.include?(current_user) %>
+        <%= link_to questionnaire_answera_path(@questionnaire, @questionnaire.answeras.find_by(questionnaire_id: @questionnaire.id, user_id: current_user.id)), method: :delete, data: { confirm: '回答をいったん取り消し、回答し直しますか？' }  do %>
+        <input type='button' id='send-edit-a' name='commit' value='回答し直す' class='btn btn-primary btn-block'>
         <% end %>
+      <% elsif @questionnaire.answering_b_users.include?(current_user) %>
+        <%= link_to questionnaire_answerb_path(@questionnaire, @questionnaire.answerbs.find_by(questionnaire_id: @questionnaire.id, user_id: current_user.id)), method: :delete, data: { confirm: '回答をいったん取り消し、回答し直しますか？' }  do %>
+        <input type='button' id='send-edit-b' name='commit' value='回答し直す' class='btn btn-primary btn-block'>
+        <% end %>
+      <% else %>
+        <input type='button' id='send-submit' name='commit' value='回答' class='btn btn-primary btn-block'>
+      <% end %>
+    <% end %>
+
+    <div class='comment-all'>
+        <div id="comments_area-<%= @questionnaire.id %>" class='comments-index'>
+          <% if @comments.length > 0 %>
+            <%= render partial: 'comments/index', locals: { comments: @comments, questionnaire: @questionnaire } %>
+          <% end %>
+      </div>
+      <div id="new_comment_area-<%= @questionnaire.id %>">
+        <%= render partial: 'comments/form', locals: { comment: @comment, questionnaire: @questionnaire } %>
+      </div>
     </div>
-    <div id="new_comment_area-<%= @questionnaire.id %>">
-      <%= render partial: 'comments/form', locals: { comment: @comment, questionnaire: @questionnaire } %>
-    </div>
-  </div>

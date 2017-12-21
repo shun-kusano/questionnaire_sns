@@ -4,8 +4,12 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable, :confirmable, :omniauthable
   mount_uploader :avatar, AvatarUploader #deviseの設定配下に追記
-  has_many :questionnaires
-  has_many :comments
+  has_many :questionnaires, dependent: :destroy
+  has_many :comments, dependent: :destroy
+  has_many :answeras, dependent: :destroy
+  has_many :answerbs, dependent: :destroy
+  has_many :answered_a_qs, :through => :answeras, :source => 'questionnaire'
+  has_many :answered_b_qs, :through => :answerbs, :source => 'questionnaire'
 
   def update_with_password(params, *options)
     if provider.blank?
@@ -55,5 +59,9 @@ class User < ApplicationRecord
 
   def self.create_unique_string
       SecureRandom.uuid
+  end
+
+  def answered_qs
+    self.answered_a_qs + self.answered_b_qs
   end
 end
