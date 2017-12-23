@@ -7,13 +7,13 @@ class CommentsController < ApplicationController
     respond_to do |format|
       #binding.pry
       if @comment.save
-        Pusher.trigger("user_#{@comment.questionnaire.user_id}_channel", 'comment_created', {
-         message: 'あなたの作成したアンケートにコメントがつきました！'
-       })
+        unless @comment.questionnaire.user.id == current_user.id
+          push_when_create(@comment)
+        end
         format.html { redirect_to questionnaires_path, notice: 'コメントが投稿されました。'}
         format.js { render :index }
       else
-        format. html { redirect_to questionnaires_path, notice: 'コメント作成時にエラーが起きました。' }
+        format.html { redirect_to questionnaires_path, notice: 'コメント作成時にエラーが起きました。' }
       end
     end
   end

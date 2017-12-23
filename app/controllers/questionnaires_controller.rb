@@ -42,7 +42,9 @@ class QuestionnairesController < ApplicationController
     @comment = @questionnaire.comments.build
     @answera = @questionnaire.answeras.build
     @answerb = @questionnaire.answerbs.build
-
+    Cmtnotification.find(params[:cnotification_id]).update(read: true) if params[:cnotification_id]
+    Ansnotification.find(params[:anotification_id]).update(answered: true) if params[:anotification_id]
+    Favnotification.find(params[:fnotification_id]).update(read: true) if params[:fnotification_id]
   end
 
   def confirm

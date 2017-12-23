@@ -39,6 +39,12 @@ ready = ->
         $('#new_answera').submit()
       else
         $('#new_answerb').submit()
+    $('#optionSelectMakeToggle1').on 'click', ->
+      $('.select-options').show()
+      $('.make-options').hide()
+    $('#optionSelectMakeToggle2').on 'click', ->
+      $('.select-options').hide()
+      $('.make-options').show()
 
   #オンロードさせ、リロード時に選択を保持
   #window.onload = deadlineEntry

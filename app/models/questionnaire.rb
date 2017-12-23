@@ -6,10 +6,17 @@ class Questionnaire < ApplicationRecord
 
   belongs_to :user
   has_many :comments, dependent: :destroy
+
   has_many :answeras, dependent: :destroy
   has_many :answerbs, dependent: :destroy
   has_many :answering_a_users, :through => :answeras, :source => 'user'
   has_many :answering_b_users, :through => :answerbs, :source => 'user'
+
+  has_many :ansnotifications, dependent: :destroy
+  has_many :favnotifications, dependent: :destroy
+
+  has_many :favorites, dependent: :destroy
+  has_many :favored_users, :through => :favorites, :source => 'user'
 
   def date_by_check
     if date_by.present?

@@ -1,0 +1,44 @@
+<div class='container'>
+  <section class='comment-notifications'>
+    <h2>あなたのアンケートに対するコメントのお知らせ</h2>
+    <ul>
+      <% @cmtnotifications.each do |cnot| %>
+      <hr>
+        <li>
+          <p>
+            あなたのアンケート（<%= link_to "#{cnot.comment.questionnaire.body}", questionnaire_path(cnot.comment.questionnaire, cnotification_id: cnot.id), :target=>["_blank"] %>）にコメントが付きました。
+          </p>
+          <p><%= cnot.created_at %></p>
+        </li>
+      <% end %>
+    </ul>
+  </section>
+  <section class='answer-notifications'>
+    <h2>あなたのアンケートに対する回答のお知らせ</h2>
+    <ul>
+      <% @ansnotifications.each do |anot| %>
+      <hr>
+        <li>
+          <p>
+            あなたのアンケート（<%= link_to "#{anot.questionnaire.body}", questionnaire_path(anot.questionnaire, anotification_id: anot.id), :target=>["_blank"] %>）に回答が付きました。
+          </p>
+          <p><%= anot.created_at %></p>
+        </li>
+      <% end %>
+    </ul>
+  </section>
+  <section class='answer-notifications'>
+    <h2>あなたのアンケートに対するお気に入りのお知らせ</h2>
+    <ul>
+      <% @favnotifications.each do |fnot| %>
+      <hr>
+        <li>
+          <p>
+            あなたのアンケート（<%= link_to "#{fnot.questionnaire.body}", questionnaire_path(fnot.questionnaire, fnotification_id: fnot.id), :target=>["_blank"] %>）が他のユーザーのお気に入りになりました。
+          </p>
+          <p><%= fnot.created_at %></p>
+        </li>
+      <% end %>
+    </ul>
+  </section>
+</div>

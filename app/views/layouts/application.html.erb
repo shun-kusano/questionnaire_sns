@@ -16,11 +16,17 @@
         });
 
         var channel = pusher.subscribe('user_<%= current_user.id %>_channel');
-        channel.bind('answer_created', function(data) {
-            alert(data.message);
+        channel.bind('notification_created', function(data) {
+          $('#unread_flag').html(data.unread_flag);
         });
         channel.bind('comment_created', function(data) {
-            alert(data.message);
+          alert(data.message);
+        });
+        channel.bind('answered_created', function(data) {
+          alert(data.message);
+        });
+        channel.bind('favorite_created', function(data) {
+          alert(data.message);
         });
       </script>
     <% end %>
@@ -28,6 +34,12 @@
   </head>
 
   <body>
+    <% if user_signed_in? %>
+      <%= link_to :controller => "notifications", :action => "index" do %>
+        <i class="fa fa-bell fa-1x"><span id="unread_flag" class='btn'><%= notification_count(current_user) %></span></i>
+      <% end %>
+    <% end %>
+
     <p class="notice"><%= notice %></p>
     <p class="alert"><%= alert %></p>
     <%= yield %>

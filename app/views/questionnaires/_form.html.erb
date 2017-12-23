@@ -33,22 +33,50 @@
     <br>
     <%= f.hidden_field :user_id,  :value => current_user.id %>
 
-    <p>
-      <%= f.label :選択肢A %>
-      <%= f.text_field :optiona_body, class: 'form-control' %>
-    </p>
-    <p>
-      <%= f.file_field :optiona_image %>
-      <%= f.hidden_field :optiona_image_cache %>
-    </p>
-    <p>
-      <%= f.label :選択肢B %>
-      <%= f.text_field :optionb_body, class: 'form-control' %>
-    </p>
-    <p>
-      <%= f.file_field :optionb_image %>
-      <%= f.hidden_field :optionb_image_cache %>
-    </p>
+    <div class='options'>
+      <h3>選択肢の作成</h3>
+        <label><input type="radio" name="optionSelectMakeToggle" id="optionSelectMakeToggle1" value="" checked="checked" />規定の選択肢から選ぶ</label>
+        <label><input type="radio" name="optionSelectMakeToggle" id="optionSelectMakeToggle2" value="" />選択肢を作成する</label>
+        <div class='select-options'>
+          <p>
+            <label><input type="radio" name="optionSelectToggle" id="optionSelectToggle1" value="" checked="checked" />
+              <p><%= f.label :選択肢A %> はい</p>
+              <p><%= f.label :選択肢B %> いいえ</p>
+            </label>
+          </p>
+          <p>
+            <label><input type="radio" name="optionSelectToggle" id="optionSelectToggle2" value="" />
+              <p><%= f.label :選択肢A %> 行く</p>
+              <p><%= f.label :選択肢B %> 行かない</p>
+            </label>
+          </p>
+          <p>
+            <label><input type="radio" name="optionSelectToggle" id="optionSelectToggle3" value="" />
+              <p><%= f.label :選択肢A %> 好き</p>
+              <p><%= f.label :選択肢B %> 嫌い</p>
+            </label>
+          </p>
+        </div>
+        <div class='make-options' style='display: none;'>
+          <p>
+            <%= f.label :選択肢A %>
+            <%= f.text_field :optiona_body, class: 'form-control' %>
+          </p>
+          <p>
+            <%= f.file_field :optiona_image %>
+            <%= f.hidden_field :optiona_image_cache %>
+          </p>
+          <p>
+            <%= f.label :選択肢B %>
+            <%= f.text_field :optionb_body, class: 'form-control' %>
+          </p>
+          <p>
+            <%= f.file_field :optionb_image %>
+            <%= f.hidden_field :optionb_image_cache %>
+          </p>
+        </div>
+
+    </div>
     <%= f.submit '投稿', class: 'btn btn-primary btn-block' %>
 <% end %>
 

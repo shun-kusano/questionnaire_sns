@@ -9,11 +9,9 @@ class AnswerasController < ApplicationController
     @answera = Answera.new(answeras_params)
     @questionnaire = @answera.questionnaire
     if @answera.save
-      @questionnaire.ansnotifications.build(user_id: @questionnaire.user.id)
-      @questionnaire.update
-      Pusher.trigger("user_#{@questionnaire.user.id}_channel", 'answer_created', {
-       message: 'あなたの作成したアンケートに回答がありました！'
-     })
+      unless @questionnaire.user_id == current_user.id
+        push_when_create(@answera)
+      end
       redirect_to @questionnaire, notice: 'あなたの回答が加わりました！'
     else
       redirect_to @questionnaire, alert: '回答できませんでした。'

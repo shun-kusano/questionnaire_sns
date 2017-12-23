@@ -1,8 +1,4 @@
 Rails.application.routes.draw do
-  get 'users/show'
-
-  get 'users/index'
-
   resources :questionnaires do
     resources :comments
     resources :answeras
@@ -17,6 +13,9 @@ Rails.application.routes.draw do
   }
 
   resources :users, :only => [:index, :show]
+  resources :notifications, :only => [:index]
+  resources :favorites
+
 
   if Rails.env.development? #開発環境の場合
     mount LetterOpenerWeb::Engine, at: "/letter_opener"
