@@ -37,6 +37,24 @@ class QuestionnairesController < ApplicationController
     @questionnaires = Questionnaire.all
   end
 
+  def user_posteds
+    @user = User.find(params[:userid])
+    @questionnaires = @user.questionnaires
+    render 'index'
+  end
+
+  def user_favorites
+    @user = User.find(params[:userid])
+    @questionnaires = @user.favorite_qs
+    render 'index'
+  end
+
+  def user_answereds
+    @user = User.find(params[:userid])
+    @questionnaires = @user.answered_qs
+    render 'index'
+  end
+
   def show
     @comments = @questionnaire.comments.all
     @comment = @questionnaire.comments.build

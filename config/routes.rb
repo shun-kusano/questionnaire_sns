@@ -3,6 +3,9 @@ Rails.application.routes.draw do
     resources :comments
     resources :answeras
     resources :answerbs
+    get 'user_posteds', on: :collection
+    get 'user_answereds', on: :collection
+    get 'user_favorites', on: :collection
   end
 
   root 'questionnaires#index'

@@ -1,41 +1,67 @@
-<% @questionnaires.each do |questionnaire| %>
-  <%= link_to questionnaire_path(questionnaire) do %>
-  <div>
-    <p> 本文：<%= questionnaire.body %></p>
-    <% if questionnaire.qimage? %>
-    <p>
-      <img src='<%= questionnaire.qimage.url %>'>
-    </p>
-    <% end %>
-    <% if questionnaire.date_by? %>
-    <p>
-      <%= questionnaire.date_by.strftime("%Y/%m/%d/ %H:%M")  %>
-    </p>
-    <% end %>
-    <p>
-      A:<%= questionnaire.optiona_body %>
-    </p>
-    <% if questionnaire.optiona_image? %>
-    <p>
-      <img src='<%= questionnaire.optiona_image.url %>'>
-    </p>
-    <% end %>
-    <p>
-      回答人数：<%= questionnaire.answering_a_users.length %>
-    </p>
+<section class='questionnaire-index'>
+  <div class='container'>
+    <% @questionnaires.each do |questionnaire| %>
+      <%= link_to questionnaire_path(questionnaire) do %>
+        <div class='questionnaire-1'>
+          <div class='questionnaire-header clearfix'>
+            <div class='user-info'>
+              <%= image_tag(profile_img_url(questionnaire.user)) %>
+              <%= questionnaire.user.name %>さんから
+            </div>
+            <div class='questionnaire-static-1'>
+              <p><i>回答期限</i></p>
+              <% if questionnaire.date_by? %>
+                <p><%= questionnaire.date_by.strftime("%Y/%m/%d/ %H:%M") %></p>
+              <% elsif %>
+                <p>なし</p>
+              <% end %>
+            </div>
+            <div class='questionnaire-static-1'>
+              <p><i>回答数</i></p>
+              <p><%= questionnaire.answering_users.count %></p>
+            </div>
+          </div>
 
-    <p>
-      B:<%= questionnaire.optionb_body %>
-    </p>
-    <% if questionnaire.optionb_image? %>
-    <p>
-      <img src='<%= questionnaire.optionb_image.url %>'>
-    </p>
+          <div class='questionnaire-body'>
+            <i class="fa fa-quora" aria-hidden="true"></i>
+            <%= questionnaire.body %>
+            <% if questionnaire.qimage? %>
+              <p>
+                <img src='<%= questionnaire.qimage.url %>'>
+              </p>
+            <% end %>
+          </div>
+
+          <div class='questionnaire-answered'>
+            <div class='bar_1' style='height: <%= bar_height(questionnaire.answering_a_users.length, questionnaire.answering_b_users.length) %>%;'></div>
+            <div class='bar_2' style='height: <%= bar_height(questionnaire.answering_b_users.length, questionnaire.answering_a_users.length) %>%;'></div>
+          </div>
+
+          <div class='questionnaire-options clearfix'>
+            <div class='optiona'>
+              <p>
+                <%= questionnaire.optiona_body %>
+              </p>
+              <% if questionnaire.optiona_image? %>
+              <p>
+                <img src='<%= questionnaire.optiona_image.url %>'>
+              </p>
+              <% end %>
+            </div>
+            <div class='optionb'>
+              <p>
+                <%= questionnaire.optionb_body %>
+              </p>
+              <% if questionnaire.optionb_image? %>
+              <p>
+                <img src='<%= questionnaire.optionb_image.url %>'>
+              </p>
+              <% end %>
+            </div>
+          </div>
+
+        </div>
+      <% end %>
     <% end %>
-    <p>
-      回答人数：<%= questionnaire.answering_b_users.length %>
-    </p>
   </div>
-  <% end %>
-  <br><br><br>
-<% end %>
+</section>

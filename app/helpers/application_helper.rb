@@ -22,5 +22,21 @@ module ApplicationHelper
     return img_url
   end
 
+  def bar_height(count1, count2)
+    if count1.zero? && count2.zero?
+      ratio = 0
+    else
+      ratio = count1 / (count1 + count2) * 100 # percentage
+      ratio = 80 if ratio > 80
+    end
+    ratio
+  end
+
+  def bar_height_b(a_count, b_count)
+    b_height = b_count / (a_count + b_count) * 100 # percentage
+    b_height = 80 if b_height > 80
+    return b_height
+  end
+
 
 end

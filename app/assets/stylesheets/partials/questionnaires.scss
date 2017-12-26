@@ -1,0 +1,92 @@
+// Place all the styles related to the questionnaires controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+.new-questionnaire  {
+  text-align: left;
+}
+
+.new-questionnaire  h2{
+  text-align: center;
+}
+
+.new-questionnaire  h3{
+  text-align: center;
+}
+
+.new-questionnaire .options .option-a {
+  background-color: #ffd3c4;
+}
+
+.new-questionnaire .options .option-b {
+  background-color: #c4e7ff;
+}
+
+.questionnaire-index {
+  .questionnaire-1 {
+    border: solid 2px #AAA;
+    border-radius: 10px;
+    .questionnaire-header {
+      background-color: #FFF;
+      border-radius: 10px;
+      width: 100%;
+      .user-info {
+        float: left;
+      }
+      .questionnaire-static-1 {
+        float: right;
+      }
+      img {
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+      }
+    }
+    .questionnaire-body {
+      width: 100%;
+      .q {
+        width: 50px;
+        height: auto;
+        margin: auto 10px;
+        float: left;
+      }
+    }
+    .questionnaire-options {
+      width: 100%;
+      .optiona {
+        width: 48%;
+        float: left;
+      }
+      .optionb {
+        width: 48%;
+        float: right;
+      }
+    }
+    .questionnaire-answered {
+      width: 100%;
+      position: relative;
+      height: 250px;
+      margin: 0 auto;
+      border: solid 5px #ccc;
+      background-image: linear-gradient( transparent 98%, rgba(#000, .2) 2%);
+      background-size: 10%;
+      background-repeat: repeat;
+      .bar-anime {
+      display: inline-block;
+      position:absolute;
+      bottom: 0;
+      width: 30%;
+      background: #ccc;
+      animation: anime1 2s 1 ease;
+      }
+      .bar_1 {background: #ff6060; left:10%;}
+      .bar_2 {background: #413bef; left:60%;}
+      @-webkit-keyframes anime1 {
+        0% {height: 0px;}
+      }
+      @keyframes anime1 {
+        0% {height: 0px;}
+      }
+    }
+  }
+}

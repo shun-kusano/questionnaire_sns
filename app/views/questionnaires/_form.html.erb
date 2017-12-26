@@ -12,72 +12,97 @@
         </div>
     <% end %>
     <%= f.label :アンケートの内容 %>
-    <%= f.text_field :body %>
+    <br>
+    <p>
+      <%= f.text_field :body, class: 'form-control', placeholder: '質問文を入力してください。' %>
+    </p>
+    <hr>
     <p>
       <%= f.label :画像投稿 %>
-      <label><input type="radio" name="qimageToggle" id="qimageToggle1" value="" checked="checked" />文章のみ</label>
-      <label><input type="radio" name="qimageToggle" id="qimageToggle2" value="" />画像を設定</label>
+      <br>
+      <label><input type="radio" name="qimageToggle" id="qimageToggle1" value="" checked="checked" /> なし</label>
+      <label><input type="radio" name="qimageToggle" id="qimageToggle2" value="" /> アップロード</label>
       <div id='questionnaire-image-selection' style='display: none;'>
         <%= f.file_field :qimage %>
         <%= f.hidden_field :qimage_cache %>
       </div>
     </p>
+    <hr>
     <p>
       <%= f.label :回答期限 %>
-      <label><input type="radio" name="deadlineToggle" id="deadlineToggle1" value="" checked="checked" />回答期限を設けない</label>
-      <label><input type="radio" name="deadlineToggle" id="deadlineToggle2" value="" />回答期限を設定</label>
+      <br>
+      <label><input type="radio" name="deadlineToggle" id="deadlineToggle1" value="" checked="checked" /> なし</label>
+      <label><input type="radio" name="deadlineToggle" id="deadlineToggle2" value="" /> 設定</label>
       <div id='deadline' style='display: none;'>
         <%= f.text_field :date_by, class: 'form-control datetimepicker' %>
       </div>
     </p>
-    <br>
     <%= f.hidden_field :user_id,  :value => current_user.id %>
+    <hr>
 
     <div class='options'>
       <h3>選択肢の作成</h3>
-        <label><input type="radio" name="optionSelectMakeToggle" id="optionSelectMakeToggle1" value="" checked="checked" />規定の選択肢から選ぶ</label>
-        <label><input type="radio" name="optionSelectMakeToggle" id="optionSelectMakeToggle2" value="" />選択肢を作成する</label>
+        <label><input type="radio" name="optionSelectMakeToggle" id="optionSelectMakeToggle1" value="" checked="checked" /> 規定の選択肢から選ぶ</label>
+        <label><input type="radio" name="optionSelectMakeToggle" id="optionSelectMakeToggle2" value="" /> オリジナルの選択肢を作成する</label>
         <div class='select-options'>
           <p>
             <label><input type="radio" name="optionSelectToggle" id="optionSelectToggle1" value="" checked="checked" />
-              <p><%= f.label :選択肢A %> はい</p>
-              <p><%= f.label :選択肢B %> いいえ</p>
+              <div class='option-a col-md-3 col-sm-10'>
+                <%= f.label :A %> ：はい
+              </div>
+              <div class='option-b col-md-3 col-sm-10'>
+                <%= f.label :B %> ：いいえ
+              </div>
             </label>
           </p>
           <p>
             <label><input type="radio" name="optionSelectToggle" id="optionSelectToggle2" value="" />
-              <p><%= f.label :選択肢A %> 行く</p>
-              <p><%= f.label :選択肢B %> 行かない</p>
+              <div class='option-a col-md-3 col-sm-10'>
+                <%= f.label :A %> ：行く
+              </div>
+              <div class='option-b col-md-3 col-sm-10'>
+                <%= f.label :B %> ：行かない
+              </div>
             </label>
           </p>
           <p>
             <label><input type="radio" name="optionSelectToggle" id="optionSelectToggle3" value="" />
-              <p><%= f.label :選択肢A %> 好き</p>
-              <p><%= f.label :選択肢B %> 嫌い</p>
+              <div class='option-a col-md-3 col-sm-10'>
+                <%= f.label :A %> ：好き
+              </div>
+              <div class='option-b col-md-3 col-sm-10'>
+                <%= f.label :B %> ：嫌い
+              </div>
             </label>
           </p>
         </div>
         <div class='make-options' style='display: none;'>
+          <div class='option-a col-md-3 col-sm-10'>
+            <%= f.label :A %>
+            <p>
+              <%= f.text_field :optiona_body, class: 'form-control', placeholder: '選択肢Aを入力してください' %>
+            </p>
+            <p>
+              <%= f.file_field :optiona_image %>
+              <%= f.hidden_field :optiona_image_cache %>
+            </p>
+          </div>
+          <div class='option-b col-md-4 col-sm-10'>
           <p>
-            <%= f.label :選択肢A %>
-            <%= f.text_field :optiona_body, class: 'form-control' %>
-          </p>
-          <p>
-            <%= f.file_field :optiona_image %>
-            <%= f.hidden_field :optiona_image_cache %>
-          </p>
-          <p>
-            <%= f.label :選択肢B %>
-            <%= f.text_field :optionb_body, class: 'form-control' %>
+            <%= f.label :B %>
+            <%= f.text_field :optionb_body, class: 'form-control', placeholder: '選択肢Bを入力してください' %>
           </p>
           <p>
             <%= f.file_field :optionb_image %>
             <%= f.hidden_field :optionb_image_cache %>
           </p>
         </div>
-
+      </div>
     </div>
-    <%= f.submit '投稿', class: 'btn btn-primary btn-block' %>
+    <input type='button' value='投稿' class='btn btn-primary btn-block' id='new-questionnaire-commit'>
+    <!--
+      <input type='submit' name='commit' value='投稿' class='btn btn-primary btn-block' id='new-questionnaire-commit' data-disable-with='投稿'>
+    -->
 <% end %>
 
-<%= link_to "ブログ一覧画面に戻る", questionnaires_path %>
+<%= link_to "アンケート一覧画面に戻る", questionnaires_path %>

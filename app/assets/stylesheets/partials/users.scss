@@ -1,0 +1,21 @@
+// Place all the styles related to the users controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+.user-show {
+  .user-static {
+
+  }
+  img {
+  width: 10%;
+  min-width: 50px;
+  border-radius: 50%;
+  }
+}
+
+.user-static-1 {
+  width: 30%;
+  margin-left: auto;
+  margin-right: auto;
+  float: left;
+}

@@ -35,18 +35,43 @@
 
   <body>
     <% if user_signed_in? %>
-      <%= link_to :controller => "notifications", :action => "index" do %>
-        <i class="fa fa-bell fa-1x"><span id="unread_flag" class='btn'><%= notification_count(current_user) %></span></i>
-      <% end %>
+      <nav class="navbar navbar-toggleable-md navbar-light bg-faded">
+        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <%= link_to questionnaires_path, class: 'navbar-brand' do %>
+          Questionnaire SNS
+        <% end %>
+        <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="nav navbar-nav navbar-right">
+          <li class="nav-item active">
+            <%= link_to questionnaires_path, class: 'nav-link' do %>
+              <i class="fa fa-quora" aria-hidden="true"></i>
+            <% end %>
+          </li>
+          <li class="nav-item">
+            <%= link_to users_path, class: 'nav-link' do %>
+              <i class="fa fa-user-circle" aria-hidden="true"></i>
+            <% end %>
+          </li>
+          <li class="nav-item">
+              <%= link_to notifications_path, class: 'nav-link' do %>
+                <i class="fa fa-bell fa-1x"><span id="unread_flag" class='btn'><%= notification_count(current_user) %></span></i>
+              <% end %>
+          </li>
+          <li class="nav-item">
+            <%= link_to user_path(current_user), class: 'nav-link' do %>
+              <i class="fa fa-address-card" aria-hidden="true"></i>
+            <% end %>
+          </li>
+        </ul>
+      </div>
+    </nav>
     <% end %>
 
     <p class="notice"><%= notice %></p>
     <p class="alert"><%= alert %></p>
     <%= yield %>
-
-    <% if user_signed_in? %>
-      <p><%= link_to "ログアウト", destroy_user_session_path, method: :delete %></p>
-    <% end %>
 
   </body>
 </html>

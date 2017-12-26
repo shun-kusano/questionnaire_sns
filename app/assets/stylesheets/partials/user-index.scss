@@ -1,0 +1,46 @@
+.user-index .container {
+  max-width: 700px;
+  margin-top: 70px;
+  margin-left: auto;
+  margin-right: auto;
+  border: solid 1px #E5E5E5;
+  border-radius: 5px;
+}
+
+.user-index .user {
+  display: flex;
+  padding: 10px;
+}
+
+.user-index .user:not( :last-child ) {
+  border-bottom: solid 1px #E5E5E5;
+}
+
+.user-index .user .photo {
+  flex: 0 0 25%;
+  text-align: right;
+}
+
+.user-index .user .photo img {
+  width: 50px;
+  border-radius: 50%;
+}
+
+.user-index .user .name {
+  flex: 0 0 25%;
+  text-align: left;
+  display: flex;
+  align-items: center;
+}
+
+.user-index .user .button {
+  flex: 0 0 50%;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.user-index .user .name span {
+  padding: 10px;
+}

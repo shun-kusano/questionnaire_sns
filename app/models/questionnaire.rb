@@ -37,6 +37,10 @@ class Questionnaire < ApplicationRecord
     end
   end
 
+  def answering_users
+    answering_a_users + answering_b_users
+  end
+
   mount_uploader :qimage, QimageUploader #deviseの設定配下に追記
   mount_uploader :optiona_image, AimageUploader #deviseの設定配下に追記
   mount_uploader :optionb_image, BimageUploader #deviseの設定配下に追記

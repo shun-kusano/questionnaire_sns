@@ -8,8 +8,24 @@
           <div class='name'>
             <span><%= link_to user.name, user %>  さん</span>
           </div>
-          投稿数：<%= user.questionnaires.length %>
-          回答数：<%= user.answered_qs.length %>
+          <div class='user-static-1'>
+            <%= link_to user_posteds_questionnaires_path(userid: user.id) do %>
+              <p><i>投稿数</i></p>
+              <h3><%= user.questionnaires.length %></h3>
+            <% end %>
+          </div>
+          <div class='user-static-1'>
+            <%= link_to user_answereds_questionnaires_path(userid: user.id) do %>
+              <p><i>回答数</i></p>
+              <h3><%= user.answered_qs.length %></h3>
+            <% end %>
+          </div>
+          <div class='user-static-1'>
+            <%= link_to user_favorites_questionnaires_path(userid: user.id) do %>
+              <p><i>お気に入り</i></p>
+              <h3><%= user.favorites.length %></h3>
+            <% end %>
+          </div>
         </div>
     <% end %>
   </div>

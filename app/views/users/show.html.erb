@@ -1,19 +1,40 @@
 <section class='user-show'>
   <div class='container'>
-    <%= render 'user_top', user: @user %>
-    <div class='user-show-questionnaires-area'>
-      <% if current_user.id == @user.id %>
-        <%= link_to :新規にアンケートを作成する, new_questionnaire_path %>
-      <% end %>
-      <% @questionnaires.each do |questionnaire| %>
-        <% if questionnaire.content.present? || questionnaire.pictures.present? %>
-          <%= render 'questionnaires/questionnaire_show_form', questionnaire: questionnaire, comments: questionnaire.comments, comment: questionnaire.comments.build %>
+    <%= image_tag(profile_img_url(@user), :class=>'user-top-avatar') %>
+    <h2><%= @user.name %> さん</h2>
+
+    <% if current_user.id == @user.id %>
+      <%= link_to :新規にアンケートを作成する, new_questionnaire_path, class: 'btn btn-primary' %>
+    <% end %>
+
+    <div class='user-static clearfix'>
+      <div class='user-static-1'>
+        <%= link_to user_posteds_questionnaires_path(userid: @user.id) do %>
+          <p><i>投稿数</i></p>
+          <h3><%= @user.questionnaires.length %></h3>
         <% end %>
-      <% end %>
-      <% if @over_ten_questionnaires %>
-        <%= link_to '以前の投稿を表示', '?m=all' %>
-      <% end %>
+      </div>
+      <div class='user-static-1'>
+        <%= link_to user_answereds_questionnaires_path(userid: @user.id) do %>
+          <p><i>回答数：</i></p>
+          <h3><%= @user.answered_qs.length %></h3>
+        <% end %>
+      </div>
+      <div class='user-static-1'>
+        <%= link_to user_favorites_questionnaires_path(userid: @user.id) do %>
+          <p><i>お気に入り</i></p>
+          <h3><%= @user.favorites.length %></h3>
+        <% end %>
+      </div>
     </div>
+
+    <% if current_user.id == @user.id %>
+      <%= link_to :アカウント情報, edit_user_registration_path(@user),  class: 'btn btn-primary' %>
+    <% end %>
+
+    <% if user_signed_in? %>
+      <p><%= link_to "ログアウト", destroy_user_session_path, method: :delete, class: 'btn btn-primary' %></p>
+    <% end %>
   </div>
 </section>
 
