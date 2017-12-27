@@ -1,8 +1,16 @@
+<div id='new-questionnaire-btn' class='new-questionnaire-btn'>
+    <p>
+      <%= link_to new_questionnaire_path, class: 'in-new-questionnaire-btn' do %>
+        <i class="fa fa-pencil" aria-hidden="true"></i>
+      <% end %>
+    </p>
+</div>
+
 <section class='questionnaire-index'>
   <div class='container'>
     <% @questionnaires.each do |questionnaire| %>
       <%= link_to questionnaire_path(questionnaire) do %>
-        <div class='questionnaire-1'>
+        <div class='container-child col-md-12 col-sm-12 col-xs-12 questionnaire-1'>
           <div class='questionnaire-header clearfix'>
             <div class='user-info'>
               <%= image_tag(profile_img_url(questionnaire.user)) %>
@@ -16,13 +24,9 @@
                 <p>なし</p>
               <% end %>
             </div>
-            <div class='questionnaire-static-1'>
-              <p><i>回答数</i></p>
-              <p><%= questionnaire.answering_users.count %></p>
-            </div>
           </div>
 
-          <div class='questionnaire-body'>
+          <div class='questionnaire-body clearfix'>
             <i class="fa fa-quora" aria-hidden="true"></i>
             <%= questionnaire.body %>
             <% if questionnaire.qimage? %>
@@ -33,6 +37,15 @@
           </div>
 
           <div class='questionnaire-answered'>
+            <div class='all-answers'><p>
+              回答人数　　<strong><%= questionnaire.answering_users.length %></strong>
+            </p></div>
+            <div class='bar-caption1' style='bottom: <%= bar_cap_height(questionnaire.answering_a_users.length, questionnaire.answering_b_users.length) %>%;'>
+              <strong><%= questionnaire.answering_a_users.length %>人</strong>
+            </div>
+            <div class='bar-caption2' style='bottom: <%= bar_cap_height(questionnaire.answering_b_users.length, questionnaire.answering_a_users.length) %>%;'>
+              <strong><%= questionnaire.answering_b_users.length %>人</strong>
+            </div>
             <div class='bar_1' style='height: <%= bar_height(questionnaire.answering_a_users.length, questionnaire.answering_b_users.length) %>%;'></div>
             <div class='bar_2' style='height: <%= bar_height(questionnaire.answering_b_users.length, questionnaire.answering_a_users.length) %>%;'></div>
           </div>

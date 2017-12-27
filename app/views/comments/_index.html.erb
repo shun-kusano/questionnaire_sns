@@ -1,26 +1,45 @@
-<% if comments.length > 0 %>
-  <% comments.each do |comment_already| %>
-    <% if comment_already.user_id.present? %>
-    <div class='comments-area clearfix'　id="comment-<%= comment_already.id %>">
-      <div class='photo'>
-        <span data-toggle="tooltip" data-placement="top" title="<%= User.find(comment_already.user_id).name %>　さんのコメント">
-          <%= image_tag(profile_img_url(User.find(comment_already.user_id)), :class=>'avatar_in_comment') %>
-        </span>
+<% comments.each do |comment_already| %>
+  <div class='comment-one clearfix'　id="comment-<%= comment_already.id %>">
+      <% if questionnaire.answering_a_users.include?(comment_already.user) %>
+        <div class='photo float-left'>
+      <% elsif questionnaire.answering_b_users.include?(comment_already.user) %>
+        <div class='photo float-right'>
+      <% else %>
+        <div class='wrapper-notyet'>
+          <div class='photo float-left'>
+      <% end %>
+        <p>
+          <span data-toggle="tooltip" data-placement="top" title="<%= User.find(comment_already.user_id).name %>　さんのコメント">
+            <%= image_tag(profile_img_url(User.find(comment_already.user_id)), :class=>'avatar_in_comment') %>
+          </span>
+        </p>
+        <p>
+          <% if questionnaire.answering_a_users.include?(comment_already.user) %>
+              Aに回答
+          <% elsif questionnaire.answering_b_users.include?(comment_already.user) %>
+              Bに回答
+          <% else %>
+              未回答
+          <% end %>
+        </p>
       </div>
-      <p>
-        <% if questionnaire.answering_a_users.include?(comment_already.user) %>
-            Aに回答
-        <% elsif questionnaire.answering_b_users.include?(comment_already.user) %>
-            Bに回答
-        <% else %>
-            未回答
-        <% end %>
-      </p>
-      <div class='content'>
-        <p><%= comment_already.body %></p>
+      <% if questionnaire.answering_a_users.include?(comment_already.user) %>
+      <div class='content content-a float-left'>
+      <% elsif questionnaire.answering_b_users.include?(comment_already.user) %>
+      <div class='content content-b float-right'>
+      <% else %>
+      <div class='content content-notyet float-left'>
+      <% end %>
+          <p><%= comment_already.body %></p>
       </div>
       <% if current_user.id == comment_already.user.id %>
-        <div class="icons">
+      <% if questionnaire.answering_a_users.include?(comment_already.user) %>
+        <div class="icons float-left">
+      <% elsif questionnaire.answering_b_users.include?(comment_already.user) %>
+        <div class="icons float-right">
+      <% else %>
+        <div class="icons float-left">
+      <% end %>
           <%= link_to edit_questionnaire_comment_path(comment_already.questionnaire, comment_already), remote: true do %>
           <span class="fa fa-pencil-square-o fa-lg"></span>
           <% end %>
@@ -28,8 +47,11 @@
           <span class="fa fa-trash-o fa-lg"></span>
           <% end %>
         </div>
+        <% if questionnaire.answering_a_users.include?(comment_already.user) %>
+        <% elsif questionnaire.answering_b_users.include?(comment_already.user) %>
+        <% else %>
+        </div>
+        <% end %>
       <% end %>
-    </div>
-    <% end %><!-- if comments.user-id.present? -->
-  <% end %><!-- each do -->
-<% end %><!-- if -->
+  </div> <!-- div .comment-one -->
+<% end %>

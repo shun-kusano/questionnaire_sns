@@ -2,7 +2,7 @@
   <div class='input'>
     <div class='text'>
       <%= image_tag(profile_img_url(current_user), :class=>'avatar_in_text') %>
-      <%= f.text_area :body, :placeholder=>'コメントする' %>
+      <%= f.text_area :body, :placeholder=>'コメントする', class: 'form-control' %>
       <%= f.hidden_field :questionnaire_id, :value => questionnaire.id %>
     </div><!-- text -->
   </div>

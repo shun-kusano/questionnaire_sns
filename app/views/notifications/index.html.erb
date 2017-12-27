@@ -1,6 +1,7 @@
 <div class='container'>
   <section class='comment-notifications'>
     <h2>あなたのアンケートに対するコメントのお知らせ</h2>
+    <% if @cmtnotifications.count > 0 %>
     <ul>
       <% @cmtnotifications.each do |cnot| %>
       <hr>
@@ -12,9 +13,14 @@
         </li>
       <% end %>
     </ul>
+    <% else %>
+    <p>今はありません。</p>
+    <% end %>
   </section>
+  <hr>
   <section class='answer-notifications'>
     <h2>あなたのアンケートに対する回答のお知らせ</h2>
+    <% if @ansnotifications.count > 0 %>
     <ul>
       <% @ansnotifications.each do |anot| %>
       <hr>
@@ -26,9 +32,14 @@
         </li>
       <% end %>
     </ul>
+    <% else %>
+    <p>今はありません。</p>
+    <% end %>
   </section>
+  <hr>
   <section class='answer-notifications'>
     <h2>あなたのアンケートに対するお気に入りのお知らせ</h2>
+    <% if @favnotifications.count > 0 %>
     <ul>
       <% @favnotifications.each do |fnot| %>
       <hr>
@@ -40,5 +51,8 @@
         </li>
       <% end %>
     </ul>
+    <% else %>
+    <p>今はありません。</p>
+    <% end %>
   </section>
 </div>

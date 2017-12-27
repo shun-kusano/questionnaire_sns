@@ -1,77 +1,113 @@
-<%= render 'users/favorite_form', {questionnaire: @questionnaire} %>
-  <p> 本文：<%= @questionnaire.body %></p>
-  <% if @questionnaire.qimage? %>
-  <p>
-    <img src='<%= @questionnaire.qimage.url %>'>
-  </p>
-  <% end %>
-  <% if @questionnaire.date_by? %>
-  <p>
-    <%= @questionnaire.date_by.strftime("%Y/%m/%d/ %H:%M")  %>
-  </p>
-  <% end %>
-  <%= form_for([@questionnaire, @answera]) do |f| %>
-    <p>
-      A:<%= @questionnaire.optiona_body %>
-    </p>
-    <% if @questionnaire.optiona_image? %>
-    <p>
-      <img src='<%= @questionnaire.optiona_image.url %>'>
-    </p>
-    <% end %>
-    <label>
-      <%= f.radio_button :questionnaire_id, @questionnaire.id, {:id => 'a-radio-button', :checked => true} %>
-      <%= f.hidden_field :user_id, value: current_user.id %>
-    </label>
-  <% end %>
-  <p>
-    回答人数：<%= @questionnaire.answering_a_users.length %>
-  </p>
+<div class='container'>
+<div class='col-md-offset-2　col-md-8 col-sm-10 col-sm-offset-1 questionnaire-1'>
+    <div class='questionnaire-header clearfix'>
+      <div class='user-info'>
+        <%= image_tag(profile_img_url(@questionnaire.user)) %>
+        <%= @questionnaire.user.name %>さんから
+      </div>
+      <%= render 'users/favorite_form', {questionnaire: @questionnaire} %>
+      <div class='questionnaire-static-1'>
+        <p><i>回答期限</i></p>
+        <% if @questionnaire.date_by? %>
+          <p><%= @questionnaire.date_by.strftime("%Y/%m/%d/ %H:%M") %></p>
+        <% elsif %>
+          <p>なし</p>
+        <% end %>
+      </div>
+    </div>
 
-    <%= form_for([@questionnaire, @answerb]) do |f| %>
-      <p>
-        B:<%= @questionnaire.optionb_body %>
-      </p>
-      <% if @questionnaire.optionb_image? %>
-      <p>
-        <img src='<%= @questionnaire.optionb_image.url %>'>
-      </p>
+    <div class='questionnaire-body clearfix'>
+      <i class="fa fa-quora" aria-hidden="true"></i>
+      <%= @questionnaire.body %>
+      <% if @questionnaire.qimage? %>
+        <p>
+          <img src='<%= @questionnaire.qimage.url %>'>
+        </p>
       <% end %>
-      <label>
-        <%= f.radio_button :questionnaire_id, @questionnaire.id, {:id => 'b-radio-button', :checked => false} %>
-        <%= f.hidden_field :user_id, value: current_user.id %>
-      </label>
-    <% end %>
-    <p>
-      回答人数：<%= @questionnaire.answering_b_users.length %>
-    </p>
-    <% if @questionnaire.date_by? && Time.current > @questionnare.date_by %>
+    </div>
+
+    <div class='questionnaire-answered'>
+      <div class='all-answers'><p>
+        回答人数　　<strong><%= @questionnaire.answering_users.length %></strong>
+      </p></div>
+      <div class='bar-caption1' style='bottom: <%= bar_cap_height(@questionnaire.answering_a_users.length, @questionnaire.answering_b_users.length) %>%;'>
+        <strong><%= @questionnaire.answering_a_users.length %>人</strong>
+      </div>
+      <div class='bar-caption2' style='bottom: <%= bar_cap_height(@questionnaire.answering_b_users.length, @questionnaire.answering_a_users.length) %>%;'>
+        <strong><%= @questionnaire.answering_b_users.length %>人</strong>
+      </div>
+      <div class='bar_1' style='height: <%= bar_height(@questionnaire.answering_a_users.length, @questionnaire.answering_b_users.length) %>%;'></div>
+      <div class='bar_2' style='height: <%= bar_height(@questionnaire.answering_b_users.length, @questionnaire.answering_a_users.length) %>%;'></div>
+    </div>
+
+    <div class='questionnaire-options clearfix'>
+      <div class='optiona'>
+        <p>
+          <%= @questionnaire.optiona_body %>
+        </p>
+        <% if @questionnaire.optiona_image? %>
+        <p>
+          <img src='<%= @questionnaire.optiona_image.url %>'>
+        </p>
+        <% end %>
+      </div>
+      <div class='optionb'>
+        <p>
+          <%= @questionnaire.optionb_body %>
+        </p>
+        <% if @questionnaire.optionb_image? %>
+        <p>
+          <img src='<%= @questionnaire.optionb_image.url %>'>
+        </p>
+        <% end %>
+      </div>
+    </div>
+
+  <div class="answer-btns clearfix">
+    <% if @questionnaire.date_by? && Time.current > @questionnaire.date_by %>
       <div class='alert'>
         <p>
           このアンケートの回答は終了しました。
         </p>
       </div>
     <% else %>
-      <% if @questionnaire.answering_a_users.include?(current_user) %>
-        <%= link_to questionnaire_answera_path(@questionnaire, @questionnaire.answeras.find_by(questionnaire_id: @questionnaire.id, user_id: current_user.id)), method: :delete, data: { confirm: '回答をいったん取り消し、回答し直しますか？' }  do %>
-        <input type='button' id='send-edit-a' name='commit' value='回答し直す' class='btn btn-primary btn-block'>
-        <% end %>
-      <% elsif @questionnaire.answering_b_users.include?(current_user) %>
-        <%= link_to questionnaire_answerb_path(@questionnaire, @questionnaire.answerbs.find_by(questionnaire_id: @questionnaire.id, user_id: current_user.id)), method: :delete, data: { confirm: '回答をいったん取り消し、回答し直しますか？' }  do %>
-        <input type='button' id='send-edit-b' name='commit' value='回答し直す' class='btn btn-primary btn-block'>
-        <% end %>
-      <% else %>
-        <input type='button' id='send-submit' name='commit' value='回答' class='btn btn-primary btn-block'>
+    <%= form_for([@questionnaire, @answera]) do |f| %>
+      <label class='btn btn-primary answer-btn optiona'>
+          <%= f.radio_button :questionnaire_id, @questionnaire.id, {:id => 'a-radio-button', :checked => true} %>
+          <%= f.hidden_field :user_id, value: current_user.id %>
+          <p>Aに回答する</p>
+      </label>
+    <% end %>
+    <%= form_for([@questionnaire, @answerb]) do |f| %>
+      <label class='btn btn-primary answer-btn optionb'>
+          <%= f.radio_button :questionnaire_id, @questionnaire.id, {:id => 'b-radio-button', :checked => false} %>
+          <%= f.hidden_field :user_id, value: current_user.id %>
+          <p>Bに回答する</p>
+      </label>
+    <% end %>
+    <% if @questionnaire.answering_a_users.include?(current_user) %>
+      <%= link_to questionnaire_answera_path(@questionnaire, @questionnaire.answeras.find_by(questionnaire_id: @questionnaire.id, user_id: current_user.id)), method: :delete, data: { confirm: '回答をいったん取り消し、回答し直しますか？' }  do %>
+      <input type='button' id='send-edit-a' name='commit' value='回答し直す' class='btn btn-default btn-block'>
+      <% end %>
+    <% elsif @questionnaire.answering_b_users.include?(current_user) %>
+      <%= link_to questionnaire_answerb_path(@questionnaire, @questionnaire.answerbs.find_by(questionnaire_id: @questionnaire.id, user_id: current_user.id)), method: :delete, data: { confirm: '回答をいったん取り消し、回答し直しますか？' }  do %>
+      <input type='button' id='send-edit-b' name='commit' value='回答し直す' class='btn btn-default btn-block'>
+    <% end %>
+    <% else %>
+        <input type='button' id='send-submit' name='commit' value='回答' class='btn btn-default btn-block'>
       <% end %>
     <% end %>
+  </div>
 
-    <div class='comment-all'>
-        <div id="comments_area-<%= @questionnaire.id %>" class='comments-index'>
-          <% if @comments.length > 0 %>
-            <%= render partial: 'comments/index', locals: { comments: @comments, questionnaire: @questionnaire } %>
-          <% end %>
-      </div>
-      <div id="new_comment_area-<%= @questionnaire.id %>">
-        <%= render partial: 'comments/form', locals: { comment: @comment, questionnaire: @questionnaire } %>
-      </div>
+  <div class='comment-all'>
+    <div id="comments_area-<%= @questionnaire.id %>" class='comments-index clearfix'>
+      <% if @comments.length > 0 %>
+        <%= render partial: 'comments/index', locals: { comments: @comments, questionnaire: @questionnaire } %>
+      <% end %>
     </div>
+    <hr>
+    <div id="new_comment_area-<%= @questionnaire.id %>">
+      <%= render partial: 'comments/form', locals: { comment: @comment, questionnaire: @questionnaire } %>
+    </div>
+  </div>
+</div>

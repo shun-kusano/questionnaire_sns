@@ -77,7 +77,8 @@ ready = ->
         scroll = $(window).scrollTop()
         windowHeight = $(window).height()
         if scroll > imgPos - windowHeight + windowHeight/3
-          $(".bar_1, .bar_2", @).addClass("bar-anime")          
+          $(".bar_1, .bar_2", @).addClass("bar-anime")
+          $(".bar-caption1, .bar-caption2", @).addClass("bar-cap-anime")          
           $(@).css("opacity", "1")
 
   #オンロードさせ、リロード時に選択を保持

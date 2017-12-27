@@ -14,7 +14,7 @@
     <%= f.label :アンケートの内容 %>
     <br>
     <p>
-      <%= f.text_field :body, class: 'form-control', placeholder: '質問文を入力してください。' %>
+      <%= f.text_field :body, class: 'form-control new-questionnaire-body', placeholder: '質問文を入力してください。' %>
     </p>
     <hr>
     <p>
@@ -45,39 +45,39 @@
         <label><input type="radio" name="optionSelectMakeToggle" id="optionSelectMakeToggle1" value="" checked="checked" /> 規定の選択肢から選ぶ</label>
         <label><input type="radio" name="optionSelectMakeToggle" id="optionSelectMakeToggle2" value="" /> オリジナルの選択肢を作成する</label>
         <div class='select-options'>
-          <p>
-            <label><input type="radio" name="optionSelectToggle" id="optionSelectToggle1" value="" checked="checked" />
-              <div class='option-a col-md-3 col-sm-10'>
-                <%= f.label :A %> ：はい
-              </div>
-              <div class='option-b col-md-3 col-sm-10'>
-                <%= f.label :B %> ：いいえ
-              </div>
-            </label>
-          </p>
-          <p>
-            <label><input type="radio" name="optionSelectToggle" id="optionSelectToggle2" value="" />
-              <div class='option-a col-md-3 col-sm-10'>
-                <%= f.label :A %> ：行く
-              </div>
-              <div class='option-b col-md-3 col-sm-10'>
-                <%= f.label :B %> ：行かない
-              </div>
-            </label>
-          </p>
-          <p>
-            <label><input type="radio" name="optionSelectToggle" id="optionSelectToggle3" value="" />
-              <div class='option-a col-md-3 col-sm-10'>
-                <%= f.label :A %> ：好き
-              </div>
-              <div class='option-b col-md-3 col-sm-10'>
-                <%= f.label :B %> ：嫌い
-              </div>
-            </label>
-          </p>
+        <p>
+          <label><input type="radio" name="optionSelectToggle" id="optionSelectToggle1" value="" checked="checked" />
+            <div class='option-a container-child col-md-6 col-sm-12'>
+              <%= f.label :A %> ：はい
+            </div>
+            <div class='option-b container-child col-md-6 col-sm-12'>
+              <%= f.label :B %> ：いいえ
+            </div>
+          </label>
+        </p>
+        <p>
+          <label><input type="radio" name="optionSelectToggle" id="optionSelectToggle2" value="" />
+            <div class='option-a container-child col-md-6 col-sm-12'>
+              <%= f.label :A %> ：行く
+            </div>
+            <div class='option-b container-child col-md-6 col-sm-12'>
+              <%= f.label :B %> ：行かない
+            </div>
+          </label>
+        </p>
+        <p>
+          <label><input type="radio" name="optionSelectToggle" id="optionSelectToggle3" value="" />
+            <div class='option-a container-child col-md-6 col-sm-12'>
+              <%= f.label :A %> ：好き
+            </div>
+            <div class='option-b container-child col-md-6 col-sm-12'>
+              <%= f.label :B %> ：嫌い
+            </div>
+          </label>
+        </p>
         </div>
         <div class='make-options' style='display: none;'>
-          <div class='option-a col-md-3 col-sm-10'>
+          <div class='option-a container-child col-md-6 col-sm-12'>
             <%= f.label :A %>
             <p>
               <%= f.text_field :optiona_body, class: 'form-control', placeholder: '選択肢Aを入力してください' %>
@@ -87,7 +87,7 @@
               <%= f.hidden_field :optiona_image_cache %>
             </p>
           </div>
-          <div class='option-b col-md-4 col-sm-10'>
+          <div class='option-b container-child col-md-6 col-sm-12'>
           <p>
             <%= f.label :B %>
             <%= f.text_field :optionb_body, class: 'form-control', placeholder: '選択肢Bを入力してください' %>
@@ -104,5 +104,3 @@
       <input type='submit' name='commit' value='投稿' class='btn btn-primary btn-block' id='new-questionnaire-commit' data-disable-with='投稿'>
     -->
 <% end %>
-
-<%= link_to "アンケート一覧画面に戻る", questionnaires_path %>

@@ -4,6 +4,7 @@
 
 .new-questionnaire  {
   text-align: left;
+  margin-bottom: 20px;
 }
 
 .new-questionnaire  h2{
@@ -15,78 +16,168 @@
 }
 
 .new-questionnaire .options .option-a {
+  margin: 5px 0px;
+  padding: 0 5px;
   background-color: #ffd3c4;
+  border-radius: 5px;
 }
 
 .new-questionnaire .options .option-b {
+  margin: 5px 0px;
+  padding: 0 5px;
   background-color: #c4e7ff;
+  border-radius: 5px;
 }
 
-.questionnaire-index {
-  .questionnaire-1 {
-    border: solid 2px #AAA;
+.questionnaire-1 {
+  border: solid 2px #999;
+  border-radius: 10px;
+  margin: 10px;
+  .questionnaire-header {
+    background-color: #FFF;
     border-radius: 10px;
-    .questionnaire-header {
-      background-color: #FFF;
-      border-radius: 10px;
-      width: 100%;
-      .user-info {
-        float: left;
-      }
-      .questionnaire-static-1 {
-        float: right;
-      }
-      img {
-        width: 50px;
-        height: 50px;
-        border-radius: 50%;
-      }
+    width: 100%;
+    padding: 10px;
+    .user-info {
+      float: left;
     }
-    .questionnaire-body {
-      width: 100%;
-      .q {
-        width: 50px;
-        height: auto;
-        margin: auto 10px;
-        float: left;
-      }
+    .questionnaire-static-1 {
+      float: right;
+      width: 20%;
     }
-    .questionnaire-options {
-      width: 100%;
-      .optiona {
-        width: 48%;
-        float: left;
-      }
-      .optionb {
-        width: 48%;
-        float: right;
-      }
+    img {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
     }
-    .questionnaire-answered {
-      width: 100%;
-      position: relative;
-      height: 250px;
-      margin: 0 auto;
-      border: solid 5px #ccc;
-      background-image: linear-gradient( transparent 98%, rgba(#000, .2) 2%);
-      background-size: 10%;
-      background-repeat: repeat;
-      .bar-anime {
+  }
+  .questionnaire-body {
+    width: 100%;
+    color: #000;
+    font-size: 4vw;
+    text-align: left;
+    .i {
       display: inline-block;
-      position:absolute;
-      bottom: 0;
-      width: 30%;
-      background: #ccc;
-      animation: anime1 2s 1 ease;
-      }
-      .bar_1 {background: #ff6060; left:10%;}
-      .bar_2 {background: #413bef; left:60%;}
-      @-webkit-keyframes anime1 {
-        0% {height: 0px;}
-      }
-      @keyframes anime1 {
-        0% {height: 0px;}
-      }
+      float: left;
     }
+    .q {
+      width: 50px;
+      height: auto;
+      margin: auto 10px;
+      float: left;
+    }
+  }
+  .questionnaire-options {
+    width: 100%;
+    color: #000;
+    .optiona {
+      width: 48%;
+      float: left;
+    }
+    .optionb {
+      width: 48%;
+      float: right;
+    }
+    img {
+      width: 35%;
+    }
+  }
+  .questionnaire-answered {
+    width: 100%;
+    position: relative;
+    height: 250px;
+    margin: 0 auto;
+    border: solid 5px #ccc;
+    background-image: linear-gradient( transparent 98%, rgba(#000, .2) 2%);
+    background-size: 10%;
+    background-repeat: repeat;
+    opacity: 0;
+    .all-answers {
+      background-color: #ccc;
+      color: #FFF;
+      width: 100%;
+    }
+    .bar-anime {
+    display: inline-block;
+    position:absolute;
+    bottom: 0;
+    width: 30%;
+    background: #bbb;
+    animation: anime1 2s 1 ease;
+    }
+    .bar_1 {background: #ff6060; left:10%;}
+    .bar_2 {background: #413bef; left:60%;}
+    @-webkit-keyframes anime1 {
+      0% {height: 0px;}
+    }
+    @keyframes anime1 {
+      0% {height: 0px;}
+    }
+    .bar-cap-anime {
+    display: inline-block;
+    position:absolute;
+    width: 30%;
+    animation: anime2 2s 1 ease;
+    }
+    .bar-caption1 {color: #000; left: 10%; width: 30%;}
+    .bar-caption2 {color: #000; left: 60%; width: 30%;}
+    @-webkit-keyframes anime2 {
+      0% {opacity: 0;}
+    }
+    @keyframes anime2 {
+      0% {opacity: 0;}
+    }
+  }
+}
+
+.new-questionnaire-btn {
+    border-radius: 50%;
+    background-color: #222;
+    width: 60px;
+    height: 60px;
+    cursor: pointer;
+    position: fixed;
+    right: 30px;
+    bottom: 30px;
+    z-index: 20;
+    color: white;
+    font-size: 2.5rem;
+    a {
+        display: block;
+        line-height: 60px;
+        text-decoration: none;
+        color: white;
+        &:hover {
+            color: #000;
+        }
+    }
+    &:hover {
+        background-color: #FFF;
+        color: #000;
+        border: solid 3px #000;
+    }
+}
+
+.new-questionnaire-body {
+  height: 50px;
+  vertical-align: top;
+}
+
+.answer-btns {
+  label {width: 100%;}
+  width: 100%;
+  .answer-btn {
+    width: 50%;
+    margin: 5px 0px;
+    padding: 0 5px;
+    border: none;
+  }
+  .optiona {
+    float: left;
+    background-color: #ff6060;
+  }
+  .optionb {
+    float: rigth;
+    background-color: #413bef;
   }
 }

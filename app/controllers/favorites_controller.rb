@@ -4,7 +4,7 @@ class FavoritesController < ApplicationController
   def create
     @favorite = current_user.favorites.build(favorites_params)
     @favorite.save
-    @questionnaire = Questionnaire.all.last
+    @questionnaire = Questionnaire.find_by(id: favorites_params[:questionnaire_id].to_i)
     push_when_create(@favorite)
     respond_with @questionnaire
   end

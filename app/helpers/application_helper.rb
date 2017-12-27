@@ -24,19 +24,18 @@ module ApplicationHelper
 
   def bar_height(count1, count2)
     if count1.zero? && count2.zero?
-      ratio = 0
+      ratio_i = 0
     else
-      ratio = count1 / (count1 + count2) * 100 # percentage
-      ratio = 80 if ratio > 80
+      ratio_f = count1.to_f / (count1.to_f + count2.to_i) # percentage in float
+      ratio_i = (ratio_f * 100.to_f).to_i #transform into percentage in integer
+      ratio_i = 80 if ratio_i > 80
     end
-    ratio
+    ratio_i
   end
 
-  def bar_height_b(a_count, b_count)
-    b_height = b_count / (a_count + b_count) * 100 # percentage
-    b_height = 80 if b_height > 80
-    return b_height
+  def bar_cap_height(count1, count2)
+    bar_h = bar_height(count1, count2)
+    bar_h + 2
   end
-
 
 end

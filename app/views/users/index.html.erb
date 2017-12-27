@@ -9,19 +9,34 @@
             <span><%= link_to user.name, user %>  さん</span>
           </div>
           <div class='user-static-1'>
-            <%= link_to user_posteds_questionnaires_path(userid: user.id) do %>
+            <% if user.questionnaires.length > 0 %>
+              <%= link_to user_posteds_questionnaires_path(userid: user.id) do %>
+                <p><i>投稿数</i></p>
+                <h3><%= user.questionnaires.length %></h3>
+              <% end %>
+            <% else %>
               <p><i>投稿数</i></p>
               <h3><%= user.questionnaires.length %></h3>
             <% end %>
           </div>
           <div class='user-static-1'>
-            <%= link_to user_answereds_questionnaires_path(userid: user.id) do %>
-              <p><i>回答数</i></p>
-              <h3><%= user.answered_qs.length %></h3>
-            <% end %>
+            <% if user.answered_qs.length > 0 %>
+              <%= link_to user_answereds_questionnaires_path(userid: user.id) do %>
+                <p><i>回答数</i></p>
+                <h3><%= user.answered_qs.length %></h3>
+              <% end %>
+              <% else %>
+                <p><i>回答数</i></p>
+                <h3><%= user.answered_qs.length %></h3>
+              <% end %>
           </div>
           <div class='user-static-1'>
+            <% if user.favorites.length > 0 %>
             <%= link_to user_favorites_questionnaires_path(userid: user.id) do %>
+              <p><i>お気に入り</i></p>
+              <h3><%= user.favorites.length %></h3>
+            <% end %>
+            <% else %>
               <p><i>お気に入り</i></p>
               <h3><%= user.favorites.length %></h3>
             <% end %>
