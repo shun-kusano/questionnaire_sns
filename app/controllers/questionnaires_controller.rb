@@ -34,24 +34,24 @@ class QuestionnairesController < ApplicationController
   end
 
   def index
-    @questionnaires = Questionnaire.all
+    @questionnaires = Questionnaire.all.order(created_at: :desc)
   end
 
   def user_posteds
     @user = User.find(params[:userid])
-    @questionnaires = @user.questionnaires
+    @questionnaires = @user.questionnaires.order(created_at: :desc)
     render 'index'
   end
 
   def user_favorites
     @user = User.find(params[:userid])
-    @questionnaires = @user.favorite_qs
+    @questionnaires = @user.favorite_qs.order(created_at: :desc)
     render 'index'
   end
 
   def user_answereds
     @user = User.find(params[:userid])
-    @questionnaires = @user.answered_qs
+    @questionnaires = @user.answered_qs.order(created_at: :desc)
     render 'index'
   end
 
