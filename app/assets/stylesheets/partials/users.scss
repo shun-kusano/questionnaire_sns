@@ -20,52 +20,26 @@
   float: left;
 }
 
-.home-signup {
-  width: 100%;
-  height: 100%;
-  margin: 0;
-  padding: 0;
-  border: 0;
-  .left-a {
-    margin: 0;
-    padding: 0;
-    border: 0;
+.window-signup{
+  margin-top: 30px;
+  margin-bottom: 20px;
+  background-color: #FFF;
+  border: solid 3px #999;
+  border-radius: 10px;
+  .actions {
+    margin: 10px;
+  }
+  .omniauth-login-btn {
     width: 50%;
-    height: 100%;
-    background-color: #ffe9e8;
     float: left;
-  }
-  .right-b {
-    margin: 0;
+    margin: 0 0 10px;
     padding: 0;
-    border: 0;
-    width: 50%;
-    height: 100%;
-    background-color: #e8e8ff;
-    float: right;
+    .btn {
+      width: 95%;
+    }
   }
-  .window-signup{
-    margin-left: auto;
-    margin-right: auto;
-    margin-bottom: 20px;
-    background-color: #FFF;
-    border: solid 3px #999;
-    border-radius: 10px;
-    .actions {
-      margin: 10px;
-    }
-    .omniauth-login-btn {
-      width: 50%;
-      float: left;
-      margin: 0 0 10px;
-      padding: 0;
-      .btn {
-        width: 95%;
-      }
-    }
-    label {
-      text-align: left;
-    }
+  label {
+    text-align: left;
   }
 }
 
