@@ -11,13 +11,17 @@ class QuestionnairesController < ApplicationController
   end
 
   def edit
+    if @questionnaire.answeras.empty? && @questionnaire.answerbs.empty?
+    else
+      redirect_to new_questionnaire_path, notice: '回答者があったので新規作成をしてください。'
+    end
   end
 
   def update
-    if @questionnaire.update(questionnaire_params)
-      redirect_to questionnaires_path, notice: '新しいアンケートを公開しました！'
+    if @questionnaire.update(questionnaires_params)
+      redirect_to questionnaire_path(@questionnaire), notice: 'アンケートを更新しました！'
     else
-      redirect_to new_questionnaire_path, alert: 'アンケートの作成に失敗しました。'
+      redirect_to questionnaire_path(@questionnaire), alert: 'アンケートを更新できませんでした。'
     end
   end
 

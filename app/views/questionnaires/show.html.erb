@@ -113,6 +113,13 @@
 </div>
 
 <% if @questionnaire.user_id == current_user.id %>
+  <div id='new-questionnaire-edit-btn' class='new-questionnaire-btn new-questionnaire-edit-btn'>
+      <p>
+        <%= link_to edit_questionnaire_path(@questionnaire), data: { confirm: '回答者がまだいない場合にだけ、アンケートを編集できます。回答者がいる場合は新規作成となります。よろしいですか？' }, class: 'in-new-questionnaire-btn' do %>
+          <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+        <% end %>
+      </p>
+  </div>
   <div id='new-questionnaire-btn' class='new-questionnaire-btn'>
       <p>
         <%= link_to questionnaire_path(@questionnaire), method: :delete, data: { confirm: '本当に削除していいですか？' }, remote: false, class: 'in-new-questionnaire-btn' do %>

@@ -69,9 +69,10 @@ $(document).on 'ready turbolinks:load', ->
       else
         $('[name="questionnaire[optiona_body]"]').val(['好き'])
         $('[name="questionnaire[optionb_body]"]').val(['嫌い'])
-    $('#new_questionnaire').submit()
+    $('form').submit()
+    #$('#new_questionnaire').submit()
 
-  # 選択したフォーマットにしたがって、選択肢を入力
+  #　スクロールで可視範囲に入ったら棒グラフアニメ開始
   $('.questionnaire-answered').css("opacity", "0")
   $(window).scroll ->
     $('.questionnaire-answered').each ->
