@@ -111,3 +111,13 @@
     </div>
   </div>
 </div>
+
+<% if @questionnaire.user_id == current_user.id %>
+  <div id='new-questionnaire-btn' class='new-questionnaire-btn'>
+      <p>
+        <%= link_to questionnaire_path(@questionnaire), method: :delete, data: { confirm: '本当に削除していいですか？' }, remote: false, class: 'in-new-questionnaire-btn' do %>
+          <i class="fa fa-trash-o fa-lg" aria-hidden="true"></i>
+        <% end %>
+      </p>
+  </div>
+<% end %>

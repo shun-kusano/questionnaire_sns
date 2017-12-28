@@ -25,7 +25,7 @@ class QuestionnairesController < ApplicationController
     if @questionnaire.destroy
       redirect_to questionnaires_path, notice: "アンケートを削除しました。"
     else
-      redirect_to questionnaires_path, notice: 'アンケートを削除できませんでした。'
+      redirect_to questionnaire_path(@questionnaire), notice: 'アンケートを削除できませんでした。'
     end
   end
 
