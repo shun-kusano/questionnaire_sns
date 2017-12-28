@@ -43,7 +43,7 @@
           <%= link_to edit_questionnaire_comment_path(comment_already.questionnaire, comment_already), remote: true do %>
           <span class="fa fa-pencil-square-o fa-lg"></span>
           <% end %>
-          <%= link_to questionnaire_comment_path(comment_already.questionnaire, comment_already), method: :delete, data: { confirm: '本当に削除していいですか？' }  do %>
+          <%= link_to questionnaire_comment_path(comment_already.questionnaire, comment_already), method: :delete, data: { confirm: '本当に削除していいですか？' }, remote: true  do %>
           <span class="fa fa-trash-o fa-lg"></span>
           <% end %>
         </div>

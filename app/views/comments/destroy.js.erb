@@ -1,1 +1,1 @@
-$("#comments_area-<%=  @questionnaire.id %>").html("<%= j(render 'comments/index', { comments: @questionnaire.comments, questionnaire: @questionnaire }) %>")
+$("#comments_area-<%= @questionnaire.id %>").html("<%= j(render 'comments/index', { comments: @comments, questionnaire: @questionnaire }) %>")

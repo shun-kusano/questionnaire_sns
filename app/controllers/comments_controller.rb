@@ -38,13 +38,15 @@ end
 def destroy
   @comment = Comment.find(params[:id])
   @questionnaire = @comment.questionnaire
-  respond_to do |format|
-    if @comment.destroy
-      format.html { redirect_to questionnaire_path(@questionnaire.id), notice: 'コメントを削除しました。'}
+  if @comment.destroy
+    @comments = @questionnaire.comments
+    respond_to do |format|
+      format.html { redirect_to questionnaire_path(@questionnaire), notice: 'コメントを削除しました。'}
       format.js { render :destroy }
-    else
-      format.html { redirect_to questionnaires_path, notice: 'コメントの削除ができません。' }
     end
+  else
+    @comments = @questionnaire.comments
+    redirect_to questionnaire_path(@questionnaire), notice: 'コメントの削除ができません。'
   end
 end
 

@@ -1,12 +1,15 @@
 <div id="favorite_form">
   <% if questionnaire.favored_users.include?(current_user) %>
-    <%= form_for(questionnaire.favorites.find_by(user_id: current_user.id), html: { method: :delete }, remote: false) do |f| %>
-      <%= f.submit "お気に入りを解除", class: "btn btn-large" %>
+    <%= form_for(questionnaire.favorites.find_by(user_id: current_user.id), html: { method: :delete }, remote: true) do |f| %>
+      <%= f.submit "お気に入りを解除", class: "btn btn-default" %>
     <% end %>
 <% else  %>
-    <%= form_for(current_user.favorites.build(questionnaire_id: questionnaire.id), remote: false) do |f| %>
+    <%= form_for(current_user.favorites.build(questionnaire_id: questionnaire.id), remote: true) do |f| %>
     <%= f.hidden_field :questionnaire_id, :value => questionnaire.id %>
-      <%= f.submit "お気に入りに追加", class: "btn btn-large btn-primary" %>
+      <!-- <%= f.submit "お気に入りに追加", class: "btn btn-large btn-primary" %>　-->
+      <%= button_tag :type => "submit", :class =>"btn btn-large btn-primary" do %>
+        <i class="fa fa-heart"></i>お気に入りに追加
+      <% end %>
     <% end %>
   <% end %>
 </div>
